@@ -19,9 +19,6 @@ public class Pelicula {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Pelicula{");
-        sb.append("nombre:").append(nombre);
-        sb.append('}');
-        return sb.toString();
+        return this.nombre;
     }
 }

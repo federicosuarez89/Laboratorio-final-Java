@@ -46,7 +46,18 @@ public class AccesoDatosImpl implements AccesoDatos{
 
     @Override
     public void escribir(Pelicula pelicula, String nombreRecurso, boolean anexar) throws EscrituraDatosEx {
-
+        File archivo = new File(nombreRecurso);
+        try {
+            var salida = new PrintWriter(new FileWriter(archivo,anexar));
+            //Escribimos en el archivo el nombre de la pelicula
+            salida.println(pelicula.toString());
+            //Cerramos el flujo
+            salida.close();
+            System.out.println("Se ha escrito informacion en el archivo: "+pelicula);
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new EscrituraDatosEx("Excepcion al escribir peliculas:"+e.getMessage());
+        }
     }
 
     @Override
