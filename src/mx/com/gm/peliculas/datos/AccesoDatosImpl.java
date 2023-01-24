@@ -83,6 +83,8 @@ public class AccesoDatosImpl implements AccesoDatos{
                 linea = entrada.readLine();
                 indice++;
             }
+            //Cerramos el flujo
+            entrada.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             throw new LecturaDatosEx("Excepcion al buscar pelicula: "+e.getMessage());
@@ -95,6 +97,15 @@ public class AccesoDatosImpl implements AccesoDatos{
 
     @Override
     public void crear(String nombreRecurso) throws AccesoDatosEx {
+        var archivo = new File(nombreRecurso);
+        try {
+            var salida = new PrintWriter(new FileWriter(archivo));
+            salida.close();
+            System.out.println("Se ha creado el archivo");
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new AccesoDatosEx("Excepcion al crear archivo: "+e.getMessage());
+        }
 
     }
 
