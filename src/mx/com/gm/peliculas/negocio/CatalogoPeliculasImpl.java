@@ -40,6 +40,14 @@ public class CatalogoPeliculasImpl implements CatalogoPeliculas{
 
     @Override
     public void buscarPelicula(String buscar) {
+        String resultado = null;
+        try {
+            resultado = this.datos.buscar(NOMBRE_RECURSO,buscar);
+        }catch (AccesoDatosEx e){
+            e.printStackTrace();
+            System.out.println("Error de acceso datos en el metodo buscar peliculas");
+        }
+        System.out.println("resultado = " + resultado);
 
     }
 
