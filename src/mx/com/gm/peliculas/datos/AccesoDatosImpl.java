@@ -53,7 +53,7 @@ public class AccesoDatosImpl implements AccesoDatos{
             salida.println(pelicula.toString());
             //Cerramos el flujo
             salida.close();
-            System.out.println("Se ha escrito informacion en el archivo: "+pelicula);
+            System.out.println("Se ha escrito informacion en el archivo: "+pelicula+"\n*************************\n");
         } catch (IOException e) {
             e.printStackTrace();
             throw new EscrituraDatosEx("Excepcion al escribir peliculas:"+e.getMessage());
@@ -64,7 +64,7 @@ public class AccesoDatosImpl implements AccesoDatos{
     public String buscar(String nombreRecurso, String buscar) throws LecturaDatosEx {
         var archivo = new File(nombreRecurso);
         //Si existe la pelicula se almacena en esta variable con su nombre
-        String resultado = null;
+        String resultado = "No se ha encontrado la pelicula solicitada";
         try {
             var entrada = new BufferedReader(new FileReader(archivo));
             //Definimos la variable linea para guardar lo que se ingrese por teclado
@@ -101,7 +101,7 @@ public class AccesoDatosImpl implements AccesoDatos{
         try {
             var salida = new PrintWriter(new FileWriter(archivo));
             salida.close();
-            System.out.println("Se ha creado el archivo");
+            System.out.println("Se ha creado el archivo\n**************************\n");
         } catch (IOException e) {
             e.printStackTrace();
             throw new AccesoDatosEx("Excepcion al crear archivo: "+e.getMessage());
@@ -114,7 +114,7 @@ public class AccesoDatosImpl implements AccesoDatos{
         var archivo = new File(nombreRecurso);
         if (archivo.exists()){
             archivo.delete();
-            System.out.println("Se ha borrado exitosamente el archivo");
+            System.out.println("Se ha borrado exitosamente el archivo\n**********************\n");
         }
 
 
