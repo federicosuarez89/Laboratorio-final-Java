@@ -62,7 +62,35 @@ public class AccesoDatosImpl implements AccesoDatos{
 
     @Override
     public String buscar(String nombreRecurso, String buscar) throws LecturaDatosEx {
-        return null;
+        var archivo = new File(nombreRecurso);
+        //Si existe la pelicula se almacena en esta variable con su nombre
+        String resultado = null;
+        try {
+            var entrada = new BufferedReader(new FileReader(archivo));
+            //Definimos la variable linea para guardar lo que se ingrese por teclado
+            String linea = null;
+            //Leemos lo que hay en la variable
+            linea = entrada.readLine();
+            //Definimos un contador de lineas de la lista
+            int indice = 1;
+            //Si la variable no esta vacia
+            while (linea != null){
+                if (buscar != null && buscar.equalsIgnoreCase(linea)){
+                    resultado = "Pelicula "+linea+" encontrada en el indice "+indice;
+                    break;
+                }
+                //Si no se encuentra la pelicula en la primer linea buscamos en la siguiente
+                linea = entrada.readLine();
+                indice++;
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            throw new LecturaDatosEx("Excepcion al buscar pelicula: "+e.getMessage());
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new LecturaDatosEx("Excepcion al buscar pelicula: "+e.getMessage());
+        }
+        return resultado;
     }
 
     @Override
