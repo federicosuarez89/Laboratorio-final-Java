@@ -3,6 +3,7 @@ package mx.com.gm.peliculas.negocio;
 import mx.com.gm.peliculas.datos.*;
 import mx.com.gm.peliculas.domain.Pelicula;
 import mx.com.gm.peliculas.excepciones.AccesoDatosEx;
+import mx.com.gm.peliculas.excepciones.LecturaDatosEx;
 
 public class CatalogoPeliculasImpl implements CatalogoPeliculas{
     private final AccesoDatos datos;
@@ -26,7 +27,15 @@ public class CatalogoPeliculasImpl implements CatalogoPeliculas{
 
     @Override
     public void listarPeliculas() {
-
+        try {
+            var peliculas = this.datos.listar(NOMBRE_RECURSO);
+            for (var pelicula:peliculas) {
+                System.out.println("pelicula = " + pelicula);
+            }
+        } catch (AccesoDatosEx e) {
+            e.printStackTrace();
+            System.out.println("Error de acceso datos");
+        }
     }
 
     @Override
